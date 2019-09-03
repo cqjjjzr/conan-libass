@@ -99,6 +99,7 @@ if (LIBASS_ASM)
       endif ()
 
       set(ASM_FLAGS "${ASM_FLAGS} -DHAVE_CPUNOP=0 -Dprivate_prefix=ass")
+      set(ASM_FLAGS "${ASM_FLAGS} -I ${CMAKE_SOURCE_DIR}/libass/x86")
   else ()
       message(FATAL_ERROR "Failed to enable NASM! Disable assembly optimization by using -DLIBASS_ASM=OFF.")
   endif ()
