@@ -66,8 +66,8 @@ if (LIBASS_ASM)
 
   find_package(Nasm MODULE)
 
-# https://metricpanda.com/using-nasm-with-cmake-and-clang
-enable_language(ASM_NASM)
+  # https://metricpanda.com/using-nasm-with-cmake-and-clang
+  enable_language(ASM_NASM)
 
   if (CMAKE_ASM_NASM_COMPILER_LOADED)
       set(INTEL 1)
@@ -99,7 +99,7 @@ enable_language(ASM_NASM)
       endif ()
 
       set(ASM_FLAGS "${ASM_FLAGS} -DHAVE_CPUNOP=0 -Dprivate_prefix=ass")
-      set(ASM_FLAGS "${ASM_FLAGS} -I${PROJECT_SOURCE_DIR}/libass")
+      set(ASM_FLAGS "${ASM_FLAGS} -I ${PROJECT_SOURCE_DIR}/libass")
   else ()
       message(FATAL_ERROR "Failed to enable NASM! Disable assembly optimization by using -DLIBASS_ASM=OFF.")
   endif ()
