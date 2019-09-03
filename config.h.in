@@ -1,0 +1,17 @@
+#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_NONSTDC_NO_DEPRECATE
+
+#ifdef _M_IX86
+#define __i386__
+#elif _M_AMD64
+#define __x86_64__
+#endif
+
+#cmakedefine CONFIG_ASM 1
+#cmakedefine CONFIG_FREETYPE 1
+#cmakedefine CONFIG_FRIBIDI 1
+#cmakedefine CONFIG_FONTCONFIG 1
+#cmakedefine CONFIG_CORETEXT 1
+#cmakedefine CONFIG_DIRECTWRITE 1
+#cmakedefine CONFIG_HARFBUZZ 1
+#cmakedefine CONFIG_ICONV 1
