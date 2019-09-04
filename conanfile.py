@@ -2,12 +2,12 @@ from conans import ConanFile, CMake, tools
 import os
 import shutil
 from distutils.dir_util import copy_tree
-
+import re
 
 def findfile(pattern, path):
     for root, dirs, files in os.walk(path):
         for name in files:
-            if pattern in name:
+            if re.search(pattern, name):
                 return os.path.join(root, name)
 
 class LibasseConan(ConanFile):
@@ -87,7 +87,7 @@ class LibasseConan(ConanFile):
         shutil.copy("conanbuildinfo.cmake", os.path.join(
             self._source_subfolder, "conanbuildinfo.cmake"))
         cmake = CMake(self, set_cmake_flags=True)
-        cmake.definitions["CMAKE_ASM_NASM_COMPILER"] = findfile("yasm", self.deps_cpp_info["yasm_installer"].bin_paths[0]).replace('\\', '/')
+        cmake.definitions["CMAKE_ASM_NASM_COMPILER"] = findfile("^yasm", self.deps_cpp_info["yasm_installer"].bin_paths[0]).replace('\\', '/')
         if self.options.harfbuzz:
             cmake.definitions["ENABLE_HARFBUZZ"] = True
         #cmake.definitions["CMAKE_VERBOSE_MAKEFILE"] = True
