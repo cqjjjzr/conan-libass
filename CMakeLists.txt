@@ -47,7 +47,7 @@ elseif(APPLE)
 
   find_library(APPLICATION_SERVICES_FRAMEWORK ApplicationServices)
   if (APPLICATION_SERVICES_FRAMEWORK)
-    list(APPEND THIRD_PARTY_LIBS ${APPLICATION_SERVICES_FRAMEWORK})
+    list(APPEND THIRD_PARTY_LIBS ${APPLICATION_SERVICES_FRAMEWORK} "-framework CoreFoundation" "-framework CoreText")
   else()
     message(FATAL_ERROR "ApplicationServices Framework not found!")
   endif ()
