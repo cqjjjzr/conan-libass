@@ -10,7 +10,7 @@ Style: Default,Arial,20,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-Dialogue: 0,0:00:00.00,0:00:05.00,Default,,0,0,0,,测试Foobarfoobar
+Dialogue: 0,0:00:00.00,0:00:05.00,Default,,0,0,0,,Foobarfoobar
 )EOF";
 
 int main()
