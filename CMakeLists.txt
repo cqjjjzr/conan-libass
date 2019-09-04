@@ -60,7 +60,7 @@ if (LIBASS_ASM)
                         libass/x86/blend_bitmaps.asm
                         libass/x86/blur.asm
                         libass/x86/cpuid.asm)
-  if (CMAKE_SIZEOF_VOID_P EQUAL 8)
+  if (${CONAN_SETTINGS_ARCH} STREQUAL "x86_64")
     list(APPEND LIBASS_ASM_SOURCE libass/x86/be_blur.asm)
   endif()
 
@@ -72,14 +72,14 @@ if (LIBASS_ASM)
   if (CMAKE_ASM_NASM_COMPILER_LOADED)
       set(INTEL 1)
 
-      if ("${CMAKE_SIZEOF_VOID_P}" STREQUAL "4")
-          set(BITS 32)
-          set(BITTYPE 32)
-          set(ASM_FLAGS "-DARCH_X86_64=0")
-      else ()
+      if (${CONAN_SETTINGS_ARCH} STREQUAL "x86_64")
           set(BITS 64)
           set(BITTYPE 64)
           set(ASM_FLAGS "-DARCH_X86_64=1 -DPIC")
+      else ()
+          set(BITS 32)
+          set(BITTYPE 32)
+          set(ASM_FLAGS "-DARCH_X86_64=0")
       endif ()
 
       set(ASM_FLAGS "${ASM_FLAGS} -i ${CMAKE_SOURCE_DIR}/libass/")
