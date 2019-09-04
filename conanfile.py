@@ -82,7 +82,7 @@ class LibasseConan(ConanFile):
         cmake = CMake(self)
         if self.options.harfbuzz:
             cmake.definitions["ENABLE_HARFBUZZ"] = True
-        cmake.definitions["VERBOSE"] = True
+        cmake.definitions["CMAKE_VERBOSE_MAKEFILE"] = True
         cmake.configure(source_folder=self._source_subfolder,
                         build_folder=self._build_subfolder)
         return cmake
