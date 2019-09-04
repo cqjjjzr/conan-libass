@@ -88,7 +88,7 @@ class LibasseConan(ConanFile):
 
     def build(self):
         cmake = self._configure_cmake()
-        cmake.definitions["CMAKE_VERBOSE_MAKEFILE"] = True
+        cmake.definitions["VERBOSE"] = True
         cmake.build()
 
     def package(self):
