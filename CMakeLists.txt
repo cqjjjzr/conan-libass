@@ -64,7 +64,7 @@ if (LIBASS_ASM)
     list(APPEND LIBASS_ASM_SOURCE libass/x86/be_blur.asm)
   endif()
 
-  find_package(Nasm MODULE)
+  #find_package(Nasm MODULE)
 
   # https://metricpanda.com/using-nasm-with-cmake-and-clang
   enable_language(ASM_NASM)
