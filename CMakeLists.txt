@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.15)
 project(libass)
 
 option(LIBASS_SHARED "build shared library." OFF)
@@ -46,10 +46,11 @@ elseif(APPLE)
   set(LIBASS_FONT_SOURCE libass/ass_coretext.c)
 
   message("Appending Apple frameworks...")
+  add_link_options("SHELL:-framework CoreFoundation" "SHELL:-framework CoreText")
 
   find_library(APPLICATION_SERVICES_FRAMEWORK ApplicationServices)
   if (APPLICATION_SERVICES_FRAMEWORK)
-    list(APPEND THIRD_PARTY_LIBS ${APPLICATION_SERVICES_FRAMEWORK} "-framework CoreFoundation" "-framework CoreText")
+    list(APPEND THIRD_PARTY_LIBS ${APPLICATION_SERVICES_FRAMEWORK})
   else()
     message(FATAL_ERROR "ApplicationServices Framework not found!")
   endif ()
