@@ -48,7 +48,7 @@ class LibasseConan(ConanFile):
         if self.options.harfbuzz:
             self.requires("harfbuzz/2.4.0@bincrafters/stable")
         if self._use_fontconfig:
-            self.requires("fontconfig/2.13.91@conan/stable")
+            self.requires("fontconfig/2.13.91@charliejiang/stable")
 
     def config_options(self):
         if self.settings.os == 'Windows':
