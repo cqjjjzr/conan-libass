@@ -75,14 +75,6 @@ class LibasseConan(ConanFile):
         tools.replace_in_file(os.path.join(
             self._source_subfolder, "libass", "ass_outline.c"), "max_subdiv + 1", "16")
 
-        #for fil in tools.relative_dirs(os.path.join(self._source_subfolder, "libass", "x86")):
-        #    absfil = os.path.join(self._source_subfolder, "libass", "x86", fil)
-        #    with open(absfil) as f:
-        #        if "%include \"x86/" in f.read():
-        #            tools.replace_in_file(
-        #                absfil, "%include \"x86/", "%include \"")
-
-
     def _configure_cmake(self):
         shutil.copy("conanbuildinfo.cmake", os.path.join(
             self._source_subfolder, "conanbuildinfo.cmake"))
@@ -106,3 +98,7 @@ class LibasseConan(ConanFile):
 
     def package_info(self):
         self.cpp_info.libs = tools.collect_libs(self)
+        if self.settings.os == "Macos":
+            self.cpp_info.exelinkflags.append("-framework CoreFoundation")
+            self.cpp_info.exelinkflags.append("-framework CoreText")
+            self.cpp_info.sharedlinkflags = self.cpp_info.exelinkflags
