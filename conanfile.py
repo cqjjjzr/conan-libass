@@ -79,10 +79,10 @@ class LibasseConan(ConanFile):
                 self._source_subfolder, "libass", "libass.def")
             shutil.copy(os.path.join(
                 self._source_subfolder, "libass", "libass.sym"), defpath)
-            deflns = [line.rstrip() + '\r\n' for line in open('defpath')]
+            deflns = [line.rstrip() + '\r\n' for line in open(defpath)]
             with open(defpath, 'w') as f:
                 deflns = ["LIBRARY ass\r\n", "\r\n", "EXPORTS\r\n"] + deflns
-                f.writelines()
+                f.writelines(deflns)
 
         tools.replace_in_file(os.path.join(
             self._source_subfolder, "libass", "ass_render.c"), "ASS_Outline outline[n_outlines];", "ASS_Outline outline[3];")
