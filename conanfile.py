@@ -12,7 +12,7 @@ def findfile(pattern, path):
                 return os.path.join(root, name)
 
 
-class LibasseConan(ConanFile):
+class LibassConan(ConanFile):
     name = "libass"
     version = "0.14.0"
     description = "LibASS is an SSA/ASS subtitles rendering library."
