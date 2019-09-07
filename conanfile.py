@@ -4,11 +4,13 @@ import shutil
 from distutils.dir_util import copy_tree
 import re
 
+
 def findfile(pattern, path):
     for root, dirs, files in os.walk(path):
         for name in files:
             if re.search(pattern, name):
                 return os.path.join(root, name)
+
 
 class LibasseConan(ConanFile):
     name = "libass"
@@ -22,12 +24,14 @@ class LibasseConan(ConanFile):
     license = "MIT"  # Indicates license type of the packaged library; please use SPDX Identifiers https://spdx.org/licenses/
     exports = ["LICENSE.md"]      # Packages the license for the conanfile.py
     # Remove following lines if the target lib does not use cmake.
-    exports_sources = ["CMakeLists.txt", "config.h.in", "msvc_compat/*", "FindNasm.cmake"]
+    exports_sources = ["CMakeLists.txt", "config.h.in",
+                       "msvc_compat/*", "FindNasm.cmake"]
     generators = "cmake"
 
     # Options may need to change depending on the packaged library.
     settings = "os", "arch", "compiler", "build_type"
-    options = {"shared": [True, False], "fPIC": [True, False], "harfbuzz": [True, False]}
+    options = {"shared": [True, False], "fPIC": [
+        True, False], "harfbuzz": [True, False]}
     default_options = {"shared": False, "fPIC": True, "harfbuzz": False}
 
     # Custom attributes for Bincrafters recipe conventions
@@ -62,13 +66,23 @@ class LibasseConan(ConanFile):
 
         # Rename to "source_subfolder" is a convention to simplify later steps
         os.rename(extracted_dir, self._source_subfolder)
-        shutil.copy("config.h.in", os.path.join(self._source_subfolder, "config.h.in"))
+        shutil.copy("config.h.in", os.path.join(
+            self._source_subfolder, "config.h.in"))
         shutil.copy("FindNasm.cmake", os.path.join(
             self._source_subfolder, "FindNasm.cmake"))
         shutil.copy("CMakeLists.txt", os.path.join(
             self._source_subfolder, "CMakeLists.txt"))
         copy_tree("msvc_compat", os.path.join(
             self._source_subfolder, "msvc_compat"))
+        if self.settings.os == "Windows":
+            defpath = os.path.join(
+                self._source_subfolder, "libass", "libass.def")
+            shutil.copy(os.path.join(
+                self._source_subfolder, "libass", "libass.sym"), defpath)
+            deflns = [line.rstrip() + '\r\n' for line in open('defpath')]
+            with open(defpath, 'w') as f:
+                deflns = ["LIBRARY ass\r\n", "\r\n", "EXPORTS\r\n"] + deflns
+                f.writelines()
 
         tools.replace_in_file(os.path.join(
             self._source_subfolder, "libass", "ass_render.c"), "ASS_Outline outline[n_outlines];", "ASS_Outline outline[3];")
@@ -79,7 +93,8 @@ class LibasseConan(ConanFile):
         shutil.copy("conanbuildinfo.cmake", os.path.join(
             self._source_subfolder, "conanbuildinfo.cmake"))
         cmake = CMake(self, set_cmake_flags=True)
-        cmake.definitions["CMAKE_ASM_NASM_COMPILER"] = findfile("^yasm", self.deps_cpp_info["yasm_installer"].bin_paths[0]).replace('\\', '/')
+        cmake.definitions["CMAKE_ASM_NASM_COMPILER"] = findfile(
+            "^yasm", self.deps_cpp_info["yasm_installer"].bin_paths[0]).replace('\\', '/')
         if self.options.harfbuzz:
             cmake.definitions["ENABLE_HARFBUZZ"] = True
         #cmake.definitions["CMAKE_VERBOSE_MAKEFILE"] = True
@@ -92,7 +107,8 @@ class LibasseConan(ConanFile):
         cmake.build()
 
     def package(self):
-        self.copy(pattern="LICENSE", dst="licenses", src=self._source_subfolder)
+        self.copy(pattern="LICENSE", dst="licenses",
+                  src=self._source_subfolder)
         cmake = self._configure_cmake()
         cmake.install()
 
