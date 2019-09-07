@@ -119,7 +119,7 @@ set(CONFIG_ICONV ${LIBASS_LIBICONV})
 
 if (MSVC)
   set(LIBASS_DEF_FILE libass/libass.def)
-elseif (${CMAKE_COMPILER_IS_GNUC} OR ${CMAKE_COMPILER_IS_GNUCC})
+elseif (CMAKE_COMPILER_IS_GNUC)
   set(LIBASS_DEF_FILE libass/libass.sym)
 endif ()
 
