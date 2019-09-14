@@ -2,7 +2,7 @@
 
 | Bintray | Windows | Linux & macOS |
 |:--------:|:---------:|:-----------------:|
-|[![Download](https://api.bintray.com/packages/charliejiang/conan/libass%3Abincrafters/images/download.svg) ](https://bintray.com/charliejiang/conan/libass%3Abincrafters/_latestVersion)|[![Build status](https://ci.appveyor.com/api/projects/status/github/cqjjjzr/conan-libass?svg=true)](https://ci.appveyor.com/project/qjjjzr/conan-libass)|[![Build Status](https://travis-ci.com/cqjjjzr/conan-libass.svg)](https://travis-ci.com/bincrafters/conan-libass)|
+|[![Download](https://api.bintray.com/packages/charliejiang/conan/libass%3Acharliejiang/images/download.svg) ](https://bintray.com/charliejiang/conan/libass%3Acharliejiang/_latestVersion)|[![Build status](https://ci.appveyor.com/api/projects/status/github/cqjjjzr/conan-libass?svg=true)](https://ci.appveyor.com/project/cqjjjzr/conan-libass)|[![Build Status](https://travis-ci.com/cqjjjzr/conan-libass.svg)](https://travis-ci.com/charliejiang/conan-libass)|
 
 ## Conan Information
 
