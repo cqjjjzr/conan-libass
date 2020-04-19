@@ -97,6 +97,8 @@ class LibassConan(ConanFile):
             "^yasm", self.deps_cpp_info["yasm_installer"].bin_paths[0]).replace('\\', '/')
         if self.options.harfbuzz:
             cmake.definitions["ENABLE_HARFBUZZ"] = True
+        if self.options.shared:
+            cmake.definitions["LIBASS_SHARED"] = True
         #cmake.definitions["CMAKE_VERBOSE_MAKEFILE"] = True
         cmake.configure(source_folder=self._source_subfolder,
                         build_folder=self._build_subfolder)

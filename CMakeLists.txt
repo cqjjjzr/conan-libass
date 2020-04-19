@@ -138,6 +138,7 @@ target_link_libraries(libass ${THIRD_PARTY_LIBS})
 
 set_target_properties(libass PROPERTIES PUBLIC_HEADER "libass/ass.h;libass/ass_types.h")
 install(TARGETS libass
+        RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib
         ARCHIVE DESTINATION lib
         PUBLIC_HEADER DESTINATION include
