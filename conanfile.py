@@ -39,10 +39,10 @@ class LibassConan(ConanFile):
     _build_subfolder = "build_subfolder"
 
     requires = (
-        "fribidi/1.0.5@bincrafters/stable",
-        "freetype/2.10.0@bincrafters/stable"
+        "fribidi/1.0.9",
+        "freetype/2.10.2"
     )
-    build_requires = ("yasm_installer/1.3.0@bincrafters/stable")
+    build_requires = ("yasm/1.3.0")
 
     @property
     def _use_fontconfig(self):
@@ -50,9 +50,9 @@ class LibassConan(ConanFile):
 
     def requirements(self):
         if self.options.harfbuzz:
-            self.requires("harfbuzz/2.4.0@bincrafters/stable")
+            self.requires("harfbuzz/2.6.8")
         if self._use_fontconfig:
-            self.requires("fontconfig/2.13.91@charliejiang/stable")
+            self.requires("fontconfig/2.13.91")
 
     def config_options(self):
         if self.settings.os == 'Windows':
@@ -94,7 +94,7 @@ class LibassConan(ConanFile):
             self._source_subfolder, "conanbuildinfo.cmake"))
         cmake = CMake(self, set_cmake_flags=True)
         cmake.definitions["CMAKE_ASM_NASM_COMPILER"] = findfile(
-            "^yasm", self.deps_cpp_info["yasm_installer"].bin_paths[0]).replace('\\', '/')
+            "^yasm", self.deps_cpp_info["yasm"].bin_paths[0]).replace('\\', '/')
         if self.options.harfbuzz:
             cmake.definitions["ENABLE_HARFBUZZ"] = True
         if self.options.shared:
