@@ -82,7 +82,7 @@ if (LIBASS_ASM)
       set(ASM_FLAGS "-DARCH_X86_64=0")
     endif ()
 
-    set(ASM_FLAGS "${ASM_FLAGS} -i ${CMAKE_SOURCE_DIR}/libass/")
+    set(ASM_FLAGS "${ASM_FLAGS} -i \"${CMAKE_SOURCE_DIR}/libass/\"")
 
     if (${APPLE})
       set(ASM_FLAGS "${ASM_FLAGS} -f macho${BITTYPE} -DPREFIX -DHAVE_ALIGNED_STACK=1")
